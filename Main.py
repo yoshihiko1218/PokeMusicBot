@@ -60,7 +60,7 @@ class Music(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def kjoin(self, ctx, *, channel: discord.VoiceChannel):
+    async def yjoin(self, ctx, *, channel: discord.VoiceChannel):
         """Joins a voice channel"""
 
         if ctx.voice_client is not None:
@@ -69,7 +69,7 @@ class Music(commands.Cog):
         await channel.connect()
 
     @commands.command(aliases=["p"])
-    async def kplay(self, ctx, *, url):
+    async def yplay(self, ctx, *, url):
         channel = ctx.author.voice.channel
         if channel is None:
             return await ctx.send("VCに接続していません。")
@@ -81,7 +81,7 @@ class Music(commands.Cog):
             await ctx.send("再生中：{}".format(player.title))
 
     @commands.command()
-    async def yt(self, ctx, *, url):
+    async def yyt(self, ctx, *, url):
         """Plays from a url (almost anything youtube_dl supports)"""
 
         async with ctx.typing():
@@ -118,8 +118,8 @@ class Music(commands.Cog):
         await ctx.voice_client.disconnect()
         await ctx.send("VCから離脱しました。")
 
-    @play.before_invoke
-    @yt.before_invoke
+    @yplay.before_invoke
+    @yyt.before_invoke
     @stream.before_invoke
     async def ensure_voice(self, ctx):
         if ctx.voice_client is None:
